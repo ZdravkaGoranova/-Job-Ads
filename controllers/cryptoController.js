@@ -72,14 +72,14 @@ exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req
 
 exports.getEditCrypto = async (req, res) => {
 
-    const book = await bookServices.getOne(req.params.jobId);
+    const ad = await bookServices.getOne(req.params.jobId);
     //const paymentMethods = bookUtils.generatePaymentMethod(book.paymentMethod);
 
-    if (!bookUtils.isOwner(req.user, book)) {
+    if (!bookUtils.isOwner(req.user, ad)) {
         return res.render('auth/404')// throw new Error('You are not an owner!');
     }
 
-    res.render('book/edit', { book });
+    res.render('book/edit', { ad });
 };
 
 exports.postEditCrypto = async (req, res) => {
