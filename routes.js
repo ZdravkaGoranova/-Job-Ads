@@ -16,18 +16,18 @@ router.use(authController);//router.use('/auth',authController);
 
 //router.use('/crypto',cryptoController);
 
-//router.use(cryptoController); или router.use('/cryptos',cryptoController);
+//router.use(cryptoController); или router.use('/jobs',cryptoController);
 router.get('/create', isAuth, cryptoController.getCreateCrypto);//
 router.post('/create', isAuth, cryptoController.postCreateCrypto);
 
-router.get('/cryptos/:cryptoId/details', cryptoController.getDetails);// router.get('/cubes/:cubeId/details', handleRequest(cubeControler.getDetails));//път към детайла
+router.get('/jobs/:jobsId/details', cryptoController.getDetails);// router.get('/cubes/:cubeId/details', handleRequest(cubeControler.getDetails));//път към детайла
 
-router.get('/cryptos/:cryptoId/buy', isAuth, cryptoController.getBuy);
+router.get('/jobs/:jobsId/buy', isAuth, cryptoController.getBuy);
 
-router.get('/cryptos/:cryptoId/edit', isAuth, cryptoController.getEditCrypto);// router.get('/cubes/:cubeId/edit', isAuthenticated, handleRequest(cubeControler.getEditCube));
-router.post('/cryptos/:cryptoId/edit', isAuth, cryptoController.postEditCrypto);
+router.get('/jobs/:jobsId/edit', isAuth, cryptoController.getEditCrypto);// router.get('/cubes/:cubeId/edit', isAuthenticated, handleRequest(cubeControler.getEditCube));
+router.post('/jobs/:jobsId/edit', isAuth, cryptoController.postEditCrypto);
 
-router.get('/cryptos/:cryptoId/delete', isAuth, cryptoController.getDeleteCrypto);
+router.get('/jobs/:jobsId/delete', isAuth, cryptoController.getDeleteCrypto);
 
 router.all('*', (req, res) => res.render('home/404'));
 //router.use('*', (req, res) => res.render('home/404'));
