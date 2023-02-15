@@ -46,18 +46,20 @@ exports.postCreateCrypto = async (req, res) => {
 
 exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req,res)=>{)
 
-    const book = await bookServices.getOne(req.params.bookId);
-    //console.log(crypto)
+    const ad = await bookServices.getOne(req.params.jobId);
+    console.log(ad)
 
-    const isOwner = bookUtils.isOwner(req.user, book);//const isOwner = crypto.owner==req.user._id;
-    // console.log(isOwner)
+ console.log(req.user)
 
-    const isWished = book.wishingList?.some(id => id == req.user?._id);
-    //console.log(isWished)
+    const isOwner = bookUtils.isOwner(req.user, ad);//const isOwner = crypto.owner==req.user._id;
+    console.log(isOwner)
+
+    const isApply = ad.wishingList?.some(id => id == req.user?._id);
+    //console.log(isApply)
     //crypto.paymentMethod = paymentMethodsMap[crypto.paymentMethod]
 
-    if (!book) {
-        return res.render('home/404');
+    if (!ad) {
+        return res.render('auth/404');
     }
 
     // console.log(req.user._id);
@@ -66,7 +68,7 @@ exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req
     // console.log(`=========================================`)
     // console.log(crypto.owner.toString())
 
-    res.render('book/details', { book, isOwner, isWished });
+    res.render('book/details', { ad, isOwner, isApply });
 };
 
 exports.getEditCrypto = async (req, res) => {
