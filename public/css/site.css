@@ -1,187 +1,206 @@
-@import url('https://fonts.googleapis.com/css2?family=Mukta&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
-body {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    margin: 0;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  text-transform: capitalize;
 }
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-padding-top: 5rem;
+  scroll-behavior: smooth;
 }
 
-body {
-    background: url("../img/banner.jpg");
-    background-position: 20% 82%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+html::-webkit-scrollbar {
+  width: 1rem;
 }
 
-#box {
-    height: auto;
-    width: auto;
+html::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-body {
-    position: relative;
-    min-height: 100vh;
+html::-webkit-scrollbar-thumb {
+  background: #444;
 }
 
-main {
-    padding-bottom: 1em;
+.home {
+  padding-left: 5rem;
+  padding-right: 5rem;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    padding-left: 45px;
-    padding-right: 45px;
-    padding-top: 10px;
-    background-color: #FFFFFF;
-    height: 100px;
-    align-items: center;
+.heading {
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
 }
 
-.header-logo {
-    display: flex;
-    margin-top: 0;
-    margin: 0%;
+.heading::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 0.01rem;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: -1;
 }
 
-.header-logo>img {
-    height: 85px;
-    width: 120px;
+.heading span {
+  font-size: 3rem;
+  padding: 0.5rem 2rem;
+  color: #444;
+  background: #fff;
+  border: 0.1rem solid rgba(0, 0, 0, 0.1);
 }
 
-.header-nav {
-    margin-right: 2.5em;
+.btn {
+  margin-top: 1rem;
+  display: inline-block;
+  padding: 0.9rem 3rem;
+  border-radius: 0.5rem;
+  color: #fff;
+  background: #27ae60;
+  font-size: 1.7rem;
+  cursor: pointer;
+  font-weight: 500;
 }
 
-.header-nav-list {
-    display: flex;
-    padding-right: 0px;
+.btn:hover {
+  background: #219150;
 }
 
-.header-nav-list-item {
-    list-style: none;
-    background: #ECECEC;
-    padding: 12px 20px;
-    margin: 0 1px;
-    margin-left: 4px;
+.header .header {
+  background: #27ae60;
 }
 
-.header-nav-list-item-link {
-    text-decoration: none;
-    font-family: 'Mukta', sans-serif;
-    font-size: 19px;
-    color: rgb(66, 66, 66);
+.header .header .navbar {
+  text-align: center;
 }
 
-.header-nav-list-item.active {
-    background: rgb(255, 97, 88);
+.header .header .navbar a {
+  color: #fff;
+  display: inline-block;
+  padding: 1.2rem;
+  font-size: 1.7rem;
 }
 
-.header-nav-list-item-link.active {
-    color: rgb(247, 247, 247);
+.header .header .navbar a:hover {
+  background: #219150;
 }
 
-.header-nav-list-item:hover {
-    background: #cecdcd;
+.header .header .active {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
-.header-nav-list-item.active:hover {
-    background: rgb(230, 88, 80);
+.home {
+  background: url(../image/banner-bg.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
-footer {
-    background-color: #3e295f;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 0;
-    padding: 0rem 4rem 0 3rem;
-    margin: 0%;
-    position: absolute;
-    opacity: 0.7;
-    bottom: 0;
-    height: 40px;
-    font-size: 15px;
-    color: white;
-    font-family: 'Poppins', sans-serif;
+.home .row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
 }
 
-::-webkit-scrollbar {
-    width: 10px;
-    border-radius: 10px;
+.home .row .content {
+  flex: 1 1 42rem;
 }
 
- ::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.01);
+.home .row .books-slider {
+  flex: 1 1 42rem;
+  text-align: center;
+  margin-top: 2rem;
 }
 
- ::-webkit-scrollbar-thumb {
-    background: #4d6d72;
-    border-radius: 10px;
+.home .row .books-slider img {
+  height: 25rem;
 }
 
- ::-webkit-scrollbar-thumb:hover {
-    background: #4d6d72;
+.home .row .books-slider a:hover img {
+  transform: scale(0.9);
 }
 
-.error-box {
-    position: fixed;
-    display: block;
-    z-index: 11111;
-    left: 2%;
-    top: 15%;
-    margin-top: 1em;
-    text-align: center;
-    border-radius: 0.5rem;
-    color: white;
-    height: auto;
-    width: 340px;
-    font-style: italic;
-    background-color: #3c2064;
-    box-shadow: 0px 0px 8px 7px white;
+.home .row .books-slider .stand {
+  width: 100%;
+  margin-top: -2rem;
 }
 
-.error-box>p {
-    font-size: 24px;
-    font-weight: bold;
-    font-family: 'Barlow', sans-serif;
-    padding: 14px;
-    height: auto;
+.home .row .content h3 {
+  color: #444;
+  font-size: 5.5rem;
 }
 
-.error-box {
-    -moz-animation: cssAnimation 0s ease-in 2s forwards;
-    /* Firefox */
-    -webkit-animation: cssAnimation 0s ease-in 2s forwards;
-    /* Safari and Chrome */
-    -o-animation: cssAnimation 0s ease-in 2s forwards;
-    /* Opera */
-    animation: cssAnimation 0s ease-in 2s forwards;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
+.home .row .content p {
+  color: #666;
+  font-size: 1.6rem;
+  line-height: 2;
+  padding: 1rem 0;
+}
+
+.errorContainer {
+  position: fixed;
+  right: 100px;
+  min-width: 100px;
+  display: block;
+  z-index: 11111;
+  top: 55px;
+  text-align: center;
+  border-radius: 20px;
+  color: rgb(255, 255, 255);
+  height: auto;
+  width: 320px;
+  box-shadow: 0 5px 10px black;
+}
+
+.errorContainer>p {
+  background: #219150;
+  font-size: 20px;
+  padding: 20px;
+  height: auto;
+  border-radius: 20px;
+}
+
+.errorContainer {
+  -moz-animation: cssAnimation 0s ease-in 2s forwards;
+  /* Firefox */
+  -webkit-animation: cssAnimation 0s ease-in 2s forwards;
+  /* Safari and Chrome */
+  -o-animation: cssAnimation 0s ease-in 2s forwards;
+  /* Opera */
+  animation: cssAnimation 0s ease-in 2s forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
 }
 
 @keyframes cssAnimation {
-    to {
-        width: 0;
-        height: 0;
-        overflow: hidden;
-        padding: 0;
-    }
+  to {
+      width: 0;
+      height: 0;
+      overflow: hidden;
+      padding: 0;
+  }
 }
 
 @-webkit-keyframes cssAnimation {
-    to {
-        width: 0;
-        height: 0;
-        visibility: hidden;
-        padding: 0;
-    }
+  to {
+      width: 0;
+      height: 0;
+      visibility: hidden;
+      padding: 0;
+  }
 }

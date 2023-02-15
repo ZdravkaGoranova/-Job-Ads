@@ -1,9 +1,9 @@
 const router = require('express').Router();
 
-const Crypto = require('../models/Crypto.js');
-const cryptoServices = require('../services/cryptoServices.js');
+const Book = require('../models/Book.js');
+const bookServices = require('../services/bookServices.js');
 
-const cryptoUtils = require('../utils/cryptoUtils.js');
+const bookUtils = require('../utils/bookUtils.js');
 
 
 router.get('/', (req, res) => {
@@ -14,21 +14,19 @@ router.get('/', (req, res) => {
 
 router.get('/catalog', async (req, res) => {//
 
-    let cryptos = await Crypto.find().lean();
+    let books = await Book.find().lean();
     // console.log(cryptos)
     // res.render('index', { cubes, search, difficultyFrom, diffficultyTo });
-    res.render('crypto/catalog', { cryptos });
+    res.render('book/catalog', { books });
 
 });
 router.get('/search', async (req, res) => {
 
     const { name, paymentMethod } = req.query;
-    const crypto = await cryptoServices.search(name, paymentMethod);
-    const paymentMethods = cryptoUtils.generatePaymentMethod(paymentMethod);
+    const book = await bookServices.search(name, paymentMethod);
+    const paymentMethods = bookUtils.generatePaymentMethod(paymentMethod);
 
-
-
-    res.render('home/search', { crypto, paymentMethods, name });
+    res.render('home/search', { book, paymentMethods, name });
 
 });
 
