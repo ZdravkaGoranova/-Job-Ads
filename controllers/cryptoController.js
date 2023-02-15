@@ -47,15 +47,14 @@ exports.postCreateCrypto = async (req, res) => {
 exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req,res)=>{)
 
     const ad = await bookServices.getOne(req.params.jobId);
-    console.log(ad)
-
- console.log(req.user)
+    //     console.log(ad)
+    //  console.log(req.user)
 
     const isOwner = bookUtils.isOwner(req.user, ad);//const isOwner = crypto.owner==req.user._id;
-    console.log(isOwner)
+    // console.log(isOwner)
 
-    const isApply = ad.wishingList?.some(id => id == req.user?._id);
-    //console.log(isApply)
+    const isApply = ad.usersApplied?.some(id => id == req.user?._id);
+    console.log(isApply)
     //crypto.paymentMethod = paymentMethodsMap[crypto.paymentMethod]
 
     if (!ad) {
@@ -73,11 +72,11 @@ exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req
 
 exports.getEditCrypto = async (req, res) => {
 
-    const book = await bookServices.getOne(req.params.bookId);
+    const book = await bookServices.getOne(req.params.jobId);
     //const paymentMethods = bookUtils.generatePaymentMethod(book.paymentMethod);
 
     if (!bookUtils.isOwner(req.user, book)) {
-        return res.render('home/404')// throw new Error('You are not an owner!');
+        return res.render('auth/404')// throw new Error('You are not an owner!');
     }
 
     res.render('book/edit', { book });
@@ -88,7 +87,7 @@ exports.postEditCrypto = async (req, res) => {
     const { title, author, image, bookReview, genre, stars, wishingList } = req.body
 
     try {
-        await bookServices.update(req.params.bookId, {
+        await bookServices.update(req.params.jobId, {
             title,
             author,
             image,
@@ -106,16 +105,16 @@ exports.postEditCrypto = async (req, res) => {
 };
 
 exports.getDeleteCrypto = async (req, res) => {
-    const book = await bookServices.getOne(req.params.bookId);
+    const book = await bookServices.getOne(req.params.jobId);
 
     const isOwner = bookUtils.isOwner(req.user, book);
     console.log(isOwner)
 
     if (!isOwner) {
-        return res.render('home/404');
+        return res.render('auth/404');
     }
 
-    await bookServices.delete(req.params.bookId);//await cryptoService.delete(crypto);
+    await bookServices.delete(req.params.jobId);//await cryptoService.delete(crypto);
     res.redirect('/catalog');
 };
 
@@ -129,6 +128,19 @@ exports.getWish = async (req, res) => {//router.get('/:cryptoId/buy',isAuth)
     }
     res.redirect(`/books/${req.params.bookId}/details`);
 }
+
+
+exports.getApplied = async (req, res) => {//router.get('/:cryptoId/buy',isAuth)
+    // const crypto = await cryptoService.getOne(req.params.cryptoId);
+    // const isOwner = cryptoUtils.isOwner(req.user, crypto);
+    try {
+        await bookServices.apply(req.user._id, req.params.jobId, req, res);
+    } catch (error) {
+        return res.status(400).render('home/404', { error: getErrorMessage(error) })
+    }
+    res.redirect(`/jobAds/${req.params.jobId}/details`);
+}
+
 
 
 exports.getProfile = async (req, res) => {

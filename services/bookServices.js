@@ -16,7 +16,7 @@ exports.search = async (name, paymentMethod) => {
     return cprypto;
 };
 
-exports.getAll = () => Ad.find({}).lean();
+exports.getAll = () => Book.find({}).lean();
 
 exports.create = (ownerId, cryptoData) => Ad.create({ ...cryptoData, owner: ownerId });
 
@@ -28,6 +28,30 @@ exports.delete = (bookId) => Ad.findByIdAndDelete(bookId);
 
 
 exports.getMyWishBook = (userId) => Ad.find({ wishingList: userId}).lean();
+
+exports.getAplly = (userId) => Ad.find({ usersApplied: userId}).lean();
+
+
+
+exports.apply = async (userId, bookId, req, res) => {
+    const ad = await Ad.findById(bookId);
+    const isOwner = ad.owner == req.user._id;
+    const isApply  = ad.usersApplied?.some(id => id == req.user?._id);
+
+    if (isOwner) {
+        return res.render('home/404');
+        //throw new Error ('You is Owner')
+    }
+    if (isApply) {
+        return res.render('home/404');
+        // throw new Error ('You already bought these crypto coins.')
+    }
+
+    ad.usersApplied.push(userId);
+    return await ad.save();
+    //console.log(crypto.buyers)
+    //или Crypto.findByIdAndUpdate(cryptoId, { $push: { buyers: userId } })
+};
 
 
 

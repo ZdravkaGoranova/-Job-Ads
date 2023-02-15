@@ -22,7 +22,8 @@ router.post('/create', isAuth, cryptoController.postCreateCrypto);
 
 router.get('/jobAds/:jobId/details', cryptoController.getDetails);// router.get('/cubes/:cubeId/details', handleRequest(cubeControler.getDetails));//път към детайла
 
-router.get('/jobAds/:jobId/wish', isAuth, cryptoController.getWish);
+//router.get('/jobAds/:jobId/wish', isAuth, cryptoController.getWish);
+router.get('/jobAds/:jobId/apply', isAuth, cryptoController.getApplied);
 router.get('/profile', isAuth, cryptoController.getProfile);
 
 router.get('/jobAds/:jobId/edit', isAuth, cryptoController.getEditCrypto);// router.get('/cubes/:cubeId/edit', isAuthenticated, handleRequest(cubeControler.getEditCube));
