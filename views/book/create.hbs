@@ -1,21 +1,34 @@
 
+        <main>
 
-    <section class="create-form-container">
+            <section id="create-page">
 
-        <form  method="POST">
-            <h3>Create Book Review</h3>
-            <label>Title</label>
-            <input type="text" name="title" class="box" id="">
-            <label>Author</label>
-            <input type="text" name="author" class="box" id="">
-            <label>Genre</label>
-            <input type="text" name="genre" class="box" id="">
-            <label>Stars</label>
-            <input type="number" name="stars" class="box" id="">
-            <label>Image</label>
-            <input type="text" name="image" class="box" id="">
-            <label>Review</label>
-            <textarea class="box" name="bookReview"></textarea>
-            <input type="submit" value="Create" class="btn">
-        </form>
-    </section>
+                <article class="create-page-container">
+                    <form  method="POST" class="create-page-form">
+                        <h2>Create an ad</h2>
+
+                        <label for="headline">Headline:</label>
+                        <input type="text" id="headline" placeholder="Front-End Developer with React" name="headline" value="">
+
+                        <label for="location">Location:</label>
+                        <input type="text" id="location" placeholder="Ruse, Bulgaria" name="location" value="">
+
+                        <label for="company-name">Company name:</label>
+                        <input type="text" id="company-name" placeholder="Digital Solutions" name="companyName" value="">
+
+                        <label for="company-description">Company description:</label>
+                        <input type="text" id="company-description" placeholder="We are developing a web application" name="description" value="">
+
+                        <article class="create-page-button">
+                            <button class="btn-create">Create</button>
+                        </article>
+                    </form>
+
+                    <article class="create-page-image">
+                        <!-- Do not forget to change the path to the image -->
+                        <img src="/static/img/job.png" alt="image">
+                    </article>
+                </article>
+
+            </section>
+        </main>

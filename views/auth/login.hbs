@@ -1,14 +1,36 @@
 
+        <main>
 
-    <section class="login-form-container">
+            <section id="login-page">
 
-        <form method="POST">
-            <h3>Login</h3>
-            <label>Email</label>
-            <input type="email" name="email" class="box" id="">
-            <label>Password</label>
-            <input type="password" name="password" class="box" id="">
-            <input type="submit" value="Login" class="btn">
-            <p>Don't have an account ? <a href="/register">Create one</a></p>
-        </form>
-    </section>
+                <article class="login-page-container">
+
+                    <form  method="POST" class="login-page-form">
+                        <h2>Login</h2>
+                        <p>Welcome, see the new ads!</p>
+
+                        <label for="email">Email:</label>
+                        <input type="text" id="email" placeholder="petar@abv.bg" name="email">
+
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" placeholder="******" name="password">
+
+                        <article class="login-page-button">
+                            <button class="btn-login">Login</button>
+                        </article>
+
+                        <article class="no-account">
+                            <p>Don't have an account? <a href="/register">Sign up</a></p>
+                        </article>
+                    </form>
+
+                    <article class="login-page-image">
+                        <!-- Do not forget to change the path to the image -->
+                        <img src="/static/img/job.png" alt="job-image">
+                    </article>
+                </article>
+
+            </section>
+        </main>
+
+ 

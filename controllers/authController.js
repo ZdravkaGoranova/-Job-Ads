@@ -9,10 +9,10 @@ router.get('/login', (req, res) => {
     res.render('auth/login')
 });
 router.post('/login', async (req, res) => {
-    const { email, password ,repeatPassword,description} = req.body;
+    const { email, password } = req.body;
 
     try {
-        const token = await authService.login( email, password ,repeatPassword,description);
+        const token = await authService.login( email, password );
         console.log(token)
 
         res.cookie('auth', token);

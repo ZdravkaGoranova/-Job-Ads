@@ -47,7 +47,7 @@ exports.register = async (email, password ,repeatPassword,description) => {
 };
 
 
-exports.login = async ( email, password ,repeatPassword,description) => {
+exports.login = async ( email, password ) => {
 
     //Email/User exist
     const user = await this.findByEmail(email);
@@ -65,7 +65,7 @@ exports.login = async ( email, password ,repeatPassword,description) => {
     const payload = {
         _id: user._id,
         email,
-        username: user.username,
+       // username: user.username,
     };
 
     const token = await jwt.sing(payload, SECRET);

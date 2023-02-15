@@ -3,25 +3,25 @@ const mongoose = require('mongoose');
 const adSchema = new mongoose.Schema({
     headline: {
         type: String,
-        // minLength: [4, 'Title should be at least two characters!'],
+         minLength: [4, 'Headline should be at least two characters!'],
         required: true,
 
     },
     location: {
         type: String,
         required: true,
-        // minLength: [8, 'Title should be at least two characters!'],
+         minLength: [8, 'Location should be at least two characters!'],
 
     },
     companyName: {
         type: String,
-        // minLength: [3, 'Title should be at least two characters!'],
+         minLength: [3, 'CompanyName should be at least two characters!'],
         required: true,
 
     },
     description: {
         type: String,
-        //minLength: [40, 'Title should be at least two characters!'],
+        minLength: [40, 'Description should be at least 40 characters!'],
         required: true,
 
     },
@@ -30,7 +30,7 @@ const adSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'User',
     },
-    UsersApplied: [{
+    usersApplied: [{
         type: mongoose.Types.ObjectId,
         ref: 'User',
     }],

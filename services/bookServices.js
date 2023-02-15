@@ -1,4 +1,4 @@
-const Book = require('../models/Book.js');
+const Ad = require('../models/Ad.js');
 
 const bookUtils = require('../utils/bookUtils.js');
 
@@ -16,23 +16,23 @@ exports.search = async (name, paymentMethod) => {
     return cprypto;
 };
 
-exports.getAll = () => Book.find({}).lean();
+exports.getAll = () => Ad.find({}).lean();
 
-exports.create = (ownerId, cryptoData) => Book.create({ ...cryptoData, owner: ownerId });
+exports.create = (ownerId, cryptoData) => Ad.create({ ...cryptoData, owner: ownerId });
 
-exports.getOne = (bookId) => Book.findById(bookId).lean();
+exports.getOne = (bookId) => Ad.findById(bookId).lean();
 
-exports.update = (bookId, data) => Book.findByIdAndUpdate(bookId, data, { runValidators: true });
+exports.update = (bookId, data) => Ad.findByIdAndUpdate(bookId, data, { runValidators: true });
 
-exports.delete = (bookId) => Book.findByIdAndDelete(bookId);
+exports.delete = (bookId) => Ad.findByIdAndDelete(bookId);
 
 
-exports.getMyWishBook = (userId) => Book.find({ wishingList: userId}).lean();
+exports.getMyWishBook = (userId) => Ad.find({ wishingList: userId}).lean();
 
 
 
 exports.wish = async (userId, bookId, req, res) => {
-    const book = await Book.findById(bookId);
+    const book = await Ad.findById(bookId);
     const isOwner = book.owner == req.user._id;
     const isWish  = book.wishingList?.some(id => id == req.user?._id);
 
