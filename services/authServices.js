@@ -7,47 +7,47 @@ const { SECRET } = require('../constans.js')
 exports.findByUsername = (username) => User.findOne({ username });//User.exists({username})
 exports.findByEmail = (email) => User.findOne({ email });//User.exists({email})
 
-exports.register = async (email, username, password, confirmPassword) => {
+exports.register = async (email, password ,repeatPassword,description) => {
 
-    if (password !== confirmPassword) {
+    if (password !== repeatPassword) {
         throw new Error('Password missmatc!');
     }
     //TODO:Check user exists
-    //const existingUser = await this.findByUsername(username);
-    const existingUser = await User.findOne({
-        $or: [
-            { email },
-            { username }
-        ]
-    });
+    const existingUser = await this.findByUsername(email);
+    // const existingUser = await User.findOne({
+    //     $or: [
+    //         { email },
+    //         { username }
+    //     ]
+    // });
 
     if (existingUser) {
         throw new Error('User  exists!');
     }
 
-    if (username.length < 4) {
-        throw new Error('Username is too short!');
-    }
+    // if (description.length < 40) {
+    //     throw new Error('Username is too short!');
+    // }
 
 
-    if (email.length < 10) {
-        throw new Error('Username is too short!');
-    }
+    // if (email.length < 10) {
+    //     throw new Error('Username is too short!');
+    // }
 
 
-    if (password.length < 3) {
-        throw new Error('The password should be at least four characters long!');
-    }
+    // if (password.length < 5) {
+    //     throw new Error('The password should be at least four characters long!');
+    // }
 
     const hashPassword = await bcrypt.hash(password, 10);
 
-    await User.create({ email, username, password: hashPassword });
+    await User.create({ email,description, password: hashPassword });
 
     return this.login(email, password);
 };
 
 
-exports.login = async (email, password) => {
+exports.login = async ( email, password ,repeatPassword,description) => {
 
     //Email/User exist
     const user = await this.findByEmail(email);
