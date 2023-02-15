@@ -30,7 +30,7 @@ router.post('/jobAds/:jobId/edit', isAuth, cryptoController.postEditCrypto);
 
 router.get('/jobAds/:jobId/delete', isAuth, cryptoController.getDeleteCrypto);
 
-router.all('*', (req, res) => res.render('home/404'));
+router.all('*', (req, res) => res.render('auth/404'));
 //router.use('*', (req, res) => res.render('home/404'));
 
 router.use(getErrorMessage);
