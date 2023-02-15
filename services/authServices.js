@@ -26,7 +26,7 @@ exports.register = async (email, password ,repeatPassword,description) => {
     }
 
     if (description.length < 40) {
-        throw new Error('Username is too short!');
+        throw new Error('Description is too short!');
     }
 
 
