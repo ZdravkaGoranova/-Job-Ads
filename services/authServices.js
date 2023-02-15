@@ -25,9 +25,9 @@ exports.register = async (email, password ,repeatPassword,description) => {
         throw new Error('User  exists!');
     }
 
-    // if (description.length < 40) {
-    //     throw new Error('Username is too short!');
-    // }
+    if (description.length < 40) {
+        throw new Error('Username is too short!');
+    }
 
 
     // if (email.length < 10) {
@@ -35,9 +35,9 @@ exports.register = async (email, password ,repeatPassword,description) => {
     // }
 
 
-    // if (password.length < 5) {
-    //     throw new Error('The password should be at least four characters long!');
-    // }
+    if (password.length < 5) {
+        throw new Error('The password should be at least four characters long!');
+    }
 
     const hashPassword = await bcrypt.hash(password, 10);
 

@@ -84,24 +84,21 @@ exports.getEditCrypto = async (req, res) => {
 
 exports.postEditCrypto = async (req, res) => {
 
-    const { title, author, image, bookReview, genre, stars, wishingList } = req.body
+    const { headline, location, companyName, description } = req.body
 
     try {
         await bookServices.update(req.params.jobId, {
-            title,
-            author,
-            image,
-            bookReview,
-            genre,
-            stars,
-            wishingList
+            headline,
+            location,
+            companyName,
+            description
         })
     } catch (error) {
         // console.log(error.message);
         return res.status(400).render('book/edit', { error: getErrorMessage(error) })
 
     }
-    res.redirect(`/books/${req.params.bookId}/details`);
+    res.redirect(`/jobAds/${req.params.jobId}/details`);
 };
 
 exports.getDeleteCrypto = async (req, res) => {
