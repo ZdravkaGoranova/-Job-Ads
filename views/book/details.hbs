@@ -45,15 +45,15 @@
 
     <!--This section should only be visible to the author of the current ad-->
     {{#if isOwner}}
-    <section id="info-about-candidates">
 
-        {{#if usersApplied}}
+    {{#if ad.usersApplied}}
+    <section id="info-about-candidates">
         <h2>Candidates for this ad:</h2>
         <!\--If there are people who have applied, show each of them in the following format--\>
-            {{#each usersApplied}}
+            {{#each ad.usersApplied}}
             <article class="info-about-candidates-card">
-                <h2>Email: {{this.email}}</h2>
-                <h3>Description of the candidate's skills: {{this.description}}</h3>
+                <h2>Email: {{email}}</h2>
+                <h3>Description of the candidate's skills: {{description}}</h3>
             </article>
             {{/each}}
             {{/if}}

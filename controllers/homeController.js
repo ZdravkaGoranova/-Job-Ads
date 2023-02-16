@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const Ad = require('../models/Ad.js');
-const bookServices = require('../services/bookServices.js');
+const adServices = require('../services/bookServices.js');
 
 const bookUtils = require('../utils/bookUtils.js');
 
@@ -22,8 +22,8 @@ router.get('/catalog', async (req, res) => {//
 });
 router.get('/search', async (req, res) => {
 
-    const { name, paymentMethod } = req.query;
-    const book = await bookServices.search(name, paymentMethod);
+    const {email } = req.query;
+    const ad = await adServices.search(email);
     const paymentMethods = bookUtils.generatePaymentMethod(paymentMethod);
 
     res.render('home/search', { book, paymentMethods, name });

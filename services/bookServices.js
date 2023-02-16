@@ -26,6 +26,7 @@ exports.update = (bookId, data) => Ad.findByIdAndUpdate(bookId, data, { runValid
 
 exports.delete = (bookId) => Ad.findByIdAndDelete(bookId);
 
+exports.getDetailsPop = (userId) => Ad.findById(userId).lean().populate({path:'usersApplied',select:'email description'});
 
 exports.getMyWishBook = (userId) => Ad.find({ wishingList: userId}).lean();
 

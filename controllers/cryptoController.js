@@ -33,7 +33,6 @@ exports.postCreateCrypto = async (req, res) => {
         });
         // console.log(ad);
         await ad.save();//запазва в db
-
         //или  await cryptoService.create(req.user._id, { name, image, price, description, paymentMethod })
 
         const user = await User.findOneAndUpdate(
@@ -53,7 +52,7 @@ exports.postCreateCrypto = async (req, res) => {
 
 exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req,res)=>{)
 
-    const ad = await bookServices.getOne(req.params.jobId);
+    const ad = await bookServices.getDetailsPop(req.params.jobId);
 
     let user = await User.findOne({ _id: ad.author }).exec();
     const email = user ? user.email : '';
@@ -65,36 +64,13 @@ exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req
     const isApply = ad.usersApplied?.some(id => id == req.user?._id);
     //console.log(isApply)
 
-    // const usersApplied = await User.find({ _id: { $in: ad.usersApplied } }).exec();
-
-    // const usersApplied = await User.find({ _id: { $in: ad.usersApplied } })
-    // .populate({ path: 'myAds', select: ['email', 'description'] });
-
-
-    const usersApplied = await User.find({ _id: { $in: ad.usersApplied } })
-        .select('email description')
-        .populate({ path: 'myAds', select: ['headline', 'companyName', 'description', 'location'] });
-
-
-    console.log(usersApplied)
-
-    //Това ще намери всички потребители, чиито идентификатори са включени в масива ad.usersApplied
-    //console.log(usersApplied)
-
-
     //crypto.paymentMethod = paymentMethodsMap[crypto.paymentMethod]
 
     if (!ad) {
         return res.render('auth/404');
     }
 
-    // console.log(req.user._id);
-    // console.log(req.params);
-    // console.log(req.params.cryptoId);
-    // console.log(`=========================================`)
-    // console.log(crypto.owner.toString())
-
-    res.render('book/details', { ad, isOwner, usersApplied, email });
+    res.render('book/details', { ad, isOwner, email, isApply});
 };
 
 exports.getEditCrypto = async (req, res) => {
