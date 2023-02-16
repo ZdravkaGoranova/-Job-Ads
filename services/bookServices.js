@@ -2,17 +2,17 @@ const Ad = require('../models/Ad.js');
 
 const bookUtils = require('../utils/bookUtils.js');
 
-exports.search = async (name, paymentMethod) => {
+exports.search = async (email) => {
 
     let cprypto = await this.getAll();
 
-    if (name) {
-        cprypto = cprypto.filter(x => x.name.toLowerCase() == name.toLowerCase())
+    if (email) {
+        cprypto = cprypto.filter(x => x.email.toLowerCase() == email.toLowerCase())
     }
 
-    if (paymentMethod) {
-        cprypto = cprypto.filter(x => x.paymentMethod == paymentMethod)
-    }
+    // if (paymentMethod) {
+    //     cprypto = cprypto.filter(x => x.paymentMethod == paymentMethod)
+    // }
     return cprypto;
 };
 
@@ -26,7 +26,7 @@ exports.update = (bookId, data) => Ad.findByIdAndUpdate(bookId, data, { runValid
 
 exports.delete = (bookId) => Ad.findByIdAndDelete(bookId);
 
-exports.getDetailsPop = (userId) => Ad.findById(userId).lean().populate({path:'usersApplied',select:'email description'});
+exports.getDetailsPop = (userId) => Ad.findById(userId).lean().populate({path:'usersApplied',select:'email descr'});
 
 exports.getMyWishBook = (userId) => Ad.find({ wishingList: userId}).lean();
 

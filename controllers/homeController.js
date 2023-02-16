@@ -22,11 +22,12 @@ router.get('/catalog', async (req, res) => {//
 });
 router.get('/search', async (req, res) => {
 
-    const {email } = req.query;
+    const { email } = req.query;
     const ad = await adServices.search(email);
-    const paymentMethods = bookUtils.generatePaymentMethod(paymentMethod);
 
-    res.render('home/search', { book, paymentMethods, name });
+    console.log(req.query)
+    //console.log(ad)
+    res.render('home/search', { ad });
 
 });
 
