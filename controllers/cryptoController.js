@@ -2,6 +2,7 @@
 const router = require('express').Router();
 
 const Ad = require('../models/Ad.js');
+const User = require('../models/User.js');
 const bookServices = require('../services/bookServices.js');
 const bookUtils = require('../utils/bookUtils.js');
 const { getErrorMessage } = require('../utils/errorUtils.js')
@@ -47,14 +48,19 @@ exports.postCreateCrypto = async (req, res) => {
 exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req,res)=>{)
 
     const ad = await bookServices.getOne(req.params.jobId);
-    //     console.log(ad)
-    //  console.log(req.user)
+    // console.log(ad);//console.log(req.params)
+
+    let user = await User.findOne({ _id: ad.author }).exec();
+    const email = user ? user.email : '';
+ 
 
     const isOwner = bookUtils.isOwner(req.user, ad);//const isOwner = crypto.owner==req.user._id;
     // console.log(isOwner)
 
     const isApply = ad.usersApplied?.some(id => id == req.user?._id);
     console.log(isApply)
+    console.log(email)
+
     //crypto.paymentMethod = paymentMethodsMap[crypto.paymentMethod]
 
     if (!ad) {
@@ -67,7 +73,7 @@ exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req
     // console.log(`=========================================`)
     // console.log(crypto.owner.toString())
 
-    res.render('book/details', { ad, isOwner, isApply });
+    res.render('book/details', { ad, isOwner, isApply, email });
 };
 
 exports.getEditCrypto = async (req, res) => {
