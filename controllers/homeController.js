@@ -23,10 +23,9 @@ router.get('/catalog', async (req, res) => {//
 router.get('/search', async (req, res) => {
 
     const { email } = req.query;
-    const ad = await adServices.search(email);
-
-    console.log(req.query)
-    //console.log(ad)
+    const ad = await adServices.getSearch(email,req);
+    console.log(email)
+    console.log(ad )
     res.render('home/search', { ad });
 
 });
