@@ -11,13 +11,13 @@ const { isAuth, authentication } = require('../middlewares/authMddleware.js');
 
 
 exports.getCreateCrypto = (req, res) => {//router.get('/'create',isAuth,(req, res))=>{
-    console.log(req.user);
+    // console.log(req.user);
 
     res.render('book/create');
 };
 exports.postCreateCrypto = async (req, res) => {
     // console.log(req.body);//Object на данните от url
-    console.log(req.user);
+    //console.log(req.user);
 
     try {
         const { headline, location, companyName, description, usersApplied } = req.body;
@@ -29,13 +29,19 @@ exports.postCreateCrypto = async (req, res) => {
             companyName,
             description,
             usersApplied,
-            author: req.user._id,
+            author: req.user._id, // тук добавяте автора на рекламата
         });
-        console.log(ad);
+        // console.log(ad);
         await ad.save();//запазва в db
 
-        //или 
-        //await cryptoService.create(req.user._id, { name, image, price, description, paymentMethod })
+        //или  await cryptoService.create(req.user._id, { name, image, price, description, paymentMethod })
+
+        const user = await User.findOneAndUpdate(
+            { _id: req.user._id },
+            { $push: { myAds: ad._id } },
+            { new: true }
+        );
+        // console.log(user);
 
     } catch (error) {
         console.log(error.message);
@@ -48,18 +54,33 @@ exports.postCreateCrypto = async (req, res) => {
 exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req,res)=>{)
 
     const ad = await bookServices.getOne(req.params.jobId);
-    // console.log(ad);//console.log(req.params)
 
     let user = await User.findOne({ _id: ad.author }).exec();
     const email = user ? user.email : '';
- 
+    //console.log(email)
 
     const isOwner = bookUtils.isOwner(req.user, ad);//const isOwner = crypto.owner==req.user._id;
     // console.log(isOwner)
 
     const isApply = ad.usersApplied?.some(id => id == req.user?._id);
-    console.log(isApply)
-    console.log(email)
+    //console.log(isApply)
+
+    // const usersApplied = await User.find({ _id: { $in: ad.usersApplied } }).exec();
+
+    // const usersApplied = await User.find({ _id: { $in: ad.usersApplied } })
+    // .populate({ path: 'myAds', select: ['email', 'description'] });
+
+
+    const usersApplied = await User.find({ _id: { $in: ad.usersApplied } })
+        .select('email description')
+        .populate({ path: 'myAds', select: ['headline', 'companyName', 'description', 'location'] });
+
+
+    console.log(usersApplied)
+
+    //Това ще намери всички потребители, чиито идентификатори са включени в масива ad.usersApplied
+    //console.log(usersApplied)
+
 
     //crypto.paymentMethod = paymentMethodsMap[crypto.paymentMethod]
 
@@ -73,7 +94,7 @@ exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req
     // console.log(`=========================================`)
     // console.log(crypto.owner.toString())
 
-    res.render('book/details', { ad, isOwner, isApply, email });
+    res.render('book/details', { ad, isOwner, usersApplied, email });
 };
 
 exports.getEditCrypto = async (req, res) => {
